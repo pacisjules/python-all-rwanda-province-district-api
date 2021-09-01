@@ -1,2 +1,2 @@
 # python-all-rwanda-province-district-api
- Python api project that generate district and province with their readers
+ Python api project that generate district and province with their leaders
