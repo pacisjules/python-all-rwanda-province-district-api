@@ -1,7 +1,7 @@
 from django import urls
 from django.contrib import admin
 from django.urls import path, include
-from userapp.views import UserList, CustomAuthToken, NeedjobList, Detailneedjob, home
+from userapp.views import UserList, CustomAuthToken, home
 
 
 from rest_framework_simplejwt.views import (
@@ -12,11 +12,12 @@ from rest_framework_simplejwt.views import (
 
 urlpatterns = [
 
-    path('needjob', NeedjobList.as_view(), name="list of needed job"),
-    path('needjob/<int:pk>', Detailneedjob.as_view(), name='single'),
-    
     path('', home),
-    path('user/v1', UserList.as_view(), name="user"),
+
+    path('api/', include('rwanda_treegovmap.urls')),
+
+
+    path('users', UserList.as_view(), name="user"),
     path('admin/', admin.site.urls),
 
     path('customLogin', CustomAuthToken.as_view(), name="user"),

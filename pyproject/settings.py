@@ -1,6 +1,7 @@
 from pathlib import Path
 from django.conf import settings
 from datetime import timedelta
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,6 +32,7 @@ INSTALLED_APPS = [
 
     #Added
     'userapp',
+    'rwanda_treegovmap',
     'rest_framework',
     'django.contrib.sites',
     'rest_auth',
@@ -46,6 +48,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.permissions.IsAdminUser',
     ],
 
     "DEFAULT_AUTHENTICATION_CLASSES": (
@@ -56,6 +59,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10
 }
+
 
 
 SIMPLE_JWT = {
@@ -213,10 +217,17 @@ STATIC_URL = '/static/'
 AUTH_USER_MODEL='userapp.User'
 ACCOUNT_EMAIL_REQUIRED=False
 
+#AUTH_USER_MODEL = 'django.contrib.auth.User'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+
 
 
 # EMAIL CONFIG

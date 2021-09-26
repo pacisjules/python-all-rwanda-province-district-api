@@ -10,8 +10,8 @@ from django.shortcuts import render
 from phonenumbers import phonenumber
 from django.db.models import Q
 from rest_framework import generics
-from .models import User,Needjob
-from .serializer import UserDetailsSerializer,Needjobserailizer
+from .models import User
+from .serializer import UserDetailsSerializer
 from rest_framework.permissions import AND, AllowAny, IsAuthenticated
 from pytube import YouTube
 import phonenumbers
@@ -39,19 +39,6 @@ from rest_framework.filters import SearchFilter
 
 def home(request):
     return HttpResponse("<marquee><b>Software made by Pacis Jules ISHIMWE</b></marquee>")
-
-
-#NeedJob view
-class NeedjobList(generics.ListCreateAPIView):
-        permission_classes = (AllowAny,)
-        queryset = Needjob.objects.all()
-        serializer_class= Needjobserailizer
-
-class Detailneedjob(generics.RetrieveUpdateDestroyAPIView):
-        permission_classes = (AllowAny,)
-        queryset = Needjob.objects.all()
-        serializer_class= Needjobserailizer
-
 
 
 class UserList(generics.ListCreateAPIView):
