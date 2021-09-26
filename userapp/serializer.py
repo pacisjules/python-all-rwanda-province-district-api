@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User,Needjob
+from .models import User
 from django.contrib.auth.hashers import make_password
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
@@ -25,15 +25,3 @@ class UserDetailsSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         validated_data['password'] = make_password(validated_data.get('password'))
         return super(UserDetailsSerializer, self).create(validated_data)
-
-
-class Needjobserailizer(serializers.ModelSerializer):
-    class Meta:
-        fields = (
-            'id',
-            'first_name',
-            'last_name',
-            'age',
-        )
-        
-        model = Needjob

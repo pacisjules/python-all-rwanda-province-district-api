@@ -49,26 +49,4 @@ class User(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS=['email']
 
     
-# CATEGORY Model
 
-class Category(models.Model):
-    title = models.CharField(max_length=255)
-    image = models.ImageField(
-    upload_to='Images/', default='Images/None/No-img.jpg')
-
-    class Meta:
-        verbose_name_plural = 'Categories'
-    
-    def __str__(self):
-        return self.title
-
-
-#need Job model
-
-class Needjob(models.Model):
-    first_name=models.CharField(max_length=255)
-    last_name=models.CharField(max_length=255)
-    age=models.IntegerField()
-
-    def __str__(self):
-        return self.first_name

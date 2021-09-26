@@ -1,7 +1,7 @@
 from django import urls
 from django.contrib import admin
 from django.urls import path, include
-from userapp.views import UserList, youtubedownloader,whatsapp, phone, CustomAuthToken, NeedjobList, Detailneedjob
+from userapp.views import UserList, CustomAuthToken, NeedjobList, Detailneedjob, home
 
 
 from rest_framework_simplejwt.views import (
@@ -14,11 +14,8 @@ urlpatterns = [
 
     path('needjob', NeedjobList.as_view(), name="list of needed job"),
     path('needjob/<int:pk>', Detailneedjob.as_view(), name='single'),
-
-    path('youtube', youtubedownloader),
-    path('phone', phone),
-    path('whatsappApi', whatsapp),
-
+    
+    path('', home),
     path('user/v1', UserList.as_view(), name="user"),
     path('admin/', admin.site.urls),
 

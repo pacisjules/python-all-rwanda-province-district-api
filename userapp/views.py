@@ -37,10 +37,11 @@ from rest_framework_simplejwt.views import (
 from rest_framework.filters import SearchFilter
 # Create your views here.
 
+def home(request):
+    return HttpResponse("<marquee><b>Software made by Pacis Jules ISHIMWE</b></marquee>")
 
 
-    #NeedJob view
-
+#NeedJob view
 class NeedjobList(generics.ListCreateAPIView):
         permission_classes = (AllowAny,)
         queryset = Needjob.objects.all()
@@ -83,123 +84,6 @@ class CustomAuthToken(ObtainAuthToken):
             'Created':created
         })
 
-
-
-@csrf_exempt
-def youtubedownloader(request):
-
-    
-    if request.method == 'POST':
-        data = json.loads(request.body)
-        video=data['link']
-        yt = YouTube(video)
-
-        info=[]
-        audio=[]
-
-        video=[
-        {
-            'Video Title':yt.title,
-            'video_pic':yt.thumbnail_url,
-        },
-    ]
-        for stream in yt.streams.filter(progressive=True):
-            type=stream.mime_type
-            res=stream.resolution
-
-            links={
-            'Type':type,
-            'Resolution':res,
-            'Link':stream.url
-            }
-            
-            info.append(links)
-
-        for sound in yt.streams.filter(only_audio=True):
-            type=sound.mime_type
-            res=sound.resolution
-
-            links={
-            'Type':type,
-            'Resolution':res,
-            'Link':stream.url
-            }
-            
-            audio.append(links)
-        
-            
-        #return HttpResponse(info, content_type='text/json')
-        return JsonResponse({'Info':video,'Download_videos': info,'Download_audios': audio}, content_type='text/json')
-        
-    return JsonResponse({'data': 'This Api use POST request only'})
-
-
-
-
-
-
-
-@csrf_exempt
-def phone(request):
-
-    if request.method == 'POST':
-        data = json.loads(request.body)
-        phone_number=data['phone']
-        num1=data['num1']
-        num2=data['num2']
-        sum=num1+num2
-
-        detectnumber=phonenumbers.parse(phone_number)
-        location=geocoder.description_for_number(detectnumber, 'en')
-        provider=carrier.name_for_number(detectnumber, 'en')
-
-        information=[
-        {
-            'Phone number':phone_number,
-            'Country location':location,
-            'Provider':provider,
-        },
-        {
-            'Message':'Api works well',
-            'Sum of Numbers':sum
-        }
-    ]
-
-        
-        
-        return JsonResponse({'Phone location access': information}, content_type='text/json')
-        
-    return JsonResponse({'data': 'This Api use POST request only'})
-
-
-@csrf_exempt
-def whatsapp(request):
-
-    
-    if request.method == 'POST':
-        data = json.loads(request.body)
-        phones=data['phones']
-        message = data['txt_message']
-
-        for x in phones:
-            webbrowser.open_new('https://web.whatsapp.com/send?phone=+25'+x+'&text='+message)
-            time.sleep(20)
-            
-            time.sleep(2)
-            width, height = pg.size()
-            pg.click(width / 2, height / 2)
-            pg.press('enter')
-            print('sent')
-            
-            time.sleep(13)
-            pg.hotkey('ctrl', 'w')
-            print('Closed') 
-
-        
-        #return HttpResponse(video, content_type='text/json')
-        return JsonResponse({'Result': 'sent'}, content_type='text/json')
-        
-    return JsonResponse({'data': 'This Api use POST request only'})
 
 
 
