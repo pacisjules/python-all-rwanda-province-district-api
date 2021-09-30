@@ -21,6 +21,11 @@ class occupation_type(models.Model):
         return self.type_name
 
 #1. LEADER MODEL
+
+def nameFile(instance, filename):
+    return '/'.join(['ProfileImage', str(instance.names), filename])
+
+
 class leader(models.Model):
     reader_for = [
         ('PROVINCE', 'PROVINCE'),
@@ -33,7 +38,7 @@ class leader(models.Model):
     phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True) # validators should be a list
     leader_for=models.CharField(max_length=255, choices=reader_for)
     occ_type=models.ForeignKey(occupation_type, on_delete=models.CASCADE, null=True)
-    image = models.ImageField(upload_to='ProfileImage/', default='Images/None/No-img.jpg')
+    image = models.ImageField(upload_to=nameFile, default='No-img.jpg', blank=True, null=True)
     reg_date=models.DateField(auto_now_add=True)
     reg_time=models.TimeField(auto_now_add=True)
     created_by=models.ForeignKey(User, on_delete=models.CASCADE, null=True)

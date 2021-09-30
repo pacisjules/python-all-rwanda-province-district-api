@@ -2,10 +2,7 @@ from rest_framework import settings
 from django.urls import path
 
 
-#For file Upload
-from django.conf.urls.static import static
-from django.conf import settings #For Settings
-#End For file Upload
+
 
 from .views import *
 
@@ -39,4 +36,5 @@ urlpatterns = [
     path('gallery', ListGallery.as_view(), name='Gallery'),
     path('gallery/<int:pk>', DetailGallery.as_view(), name='Gallery detail'),    
 
-] +static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)#For media File
+] 
+

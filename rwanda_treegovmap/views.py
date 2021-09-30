@@ -74,6 +74,7 @@ class ListDistricts(generics.ListCreateAPIView):
     permission_classes = (
         permissions.AllowAny,
         )
+        
     queryset = district.objects.all()
     serializer_class = district_serializer
 

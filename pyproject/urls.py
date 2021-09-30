@@ -3,6 +3,12 @@ from django.contrib import admin
 from django.urls import path, include
 from userapp.views import UserList, CustomAuthToken, home
 
+#For file Upload
+from django.conf.urls.static import static
+from django.conf import settings #For Settings
+#End For file Upload
+
+
 
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -26,3 +32,4 @@ urlpatterns = [
     path('auth/login', TokenObtainPairView.as_view(), name='Userlogin'),
     path('auth/token-refresh', TokenRefreshView.as_view(), name='Usertokenrefresh'),
 ]
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) #For media File
